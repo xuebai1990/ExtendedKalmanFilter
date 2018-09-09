@@ -125,6 +125,15 @@ int main()
     	  estimations.push_back(estimate);
 
     	  VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
+          if(RMSE(3)>2.0){
+            cout << "px " << p_x << endl;
+            cout << "py " << p_y << endl;
+            cout << "v1 " << v1 << endl;
+            cout << "v2 " << v2 << endl;
+            cout << "Measurement type " << meas_package.sensor_type_ << endl;
+            cout << "Measurement " << "Px " << meas_package.raw_measurements_(0) << "Py " << meas_package.raw_measurements_(1) << endl;
+            cout << "Ground Truth " << "x " << x_gt << "y " << y_gt << endl;
+          }
 
           json msgJson;
           msgJson["estimate_x"] = p_x;
