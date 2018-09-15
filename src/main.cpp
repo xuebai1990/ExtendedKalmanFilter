@@ -127,6 +127,7 @@ int main()
 
     	  VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
 /*          if(RMSE(3)>2.0){
+            cout << endl;
             cout << "Timestamp " << counter << endl;
             cout << "Predict " << "x" << p_x << " y " << p_y << endl;
             cout << "Measurement type " << meas_package.sensor_type_ << endl;

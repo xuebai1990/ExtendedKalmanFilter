@@ -63,9 +63,17 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   }
   phi = atan2(py, px);
   rhodot = (px*vx+py*vy)/rho;
-  VectorXd hx(3);
-  hx << rho, phi, rhodot;
-  VectorXd y = z - hx;
+  double y0 = z(0) - rho;
+  double y1 = z(1) - phi;
+  double y2 = z(2) - rhodot;
+  if(y1>3.1415926){
+    y1 = y1 - 2 * 3.1415926;
+  }
+  if(y1<-3.1415926){
+    y1 = y1 + 2 * 3.1415926;
+  }
+  VectorXd y(3);
+  y << y0, y1, y2;
 
   // Calculate H
   double rho2 = rho * rho;
