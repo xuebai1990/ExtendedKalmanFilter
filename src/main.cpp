@@ -43,9 +43,10 @@ int main()
     // The 4 signifies a websocket message
     // The 2 signifies a websocket event
 
+    static int counter = 0;
     if (length && length > 2 && data[0] == '4' && data[1] == '2')
     {
-
+      counter += 1;
       auto s = hasData(std::string(data));
       if (s != "") {
       	
@@ -125,15 +126,13 @@ int main()
     	  estimations.push_back(estimate);
 
     	  VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
-          if(RMSE(3)>2.0){
-            cout << "px " << p_x << endl;
-            cout << "py " << p_y << endl;
-            cout << "v1 " << v1 << endl;
-            cout << "v2 " << v2 << endl;
+/*          if(RMSE(3)>2.0){
+            cout << "Timestamp " << counter << endl;
+            cout << "Predict " << "x" << p_x << " y " << p_y << endl;
             cout << "Measurement type " << meas_package.sensor_type_ << endl;
-            cout << "Measurement " << "Px " << meas_package.raw_measurements_(0) << "Py " << meas_package.raw_measurements_(1) << endl;
-            cout << "Ground Truth " << "x " << x_gt << "y " << y_gt << endl;
-          }
+            cout << "Measurement " << "Px " << meas_package.raw_measurements_(0) << " Py " << meas_package.raw_measurements_(1) << endl;
+            cout << "Ground Truth " << "x " << x_gt << " y " << y_gt << endl;
+          } */
 
           json msgJson;
           msgJson["estimate_x"] = p_x;
